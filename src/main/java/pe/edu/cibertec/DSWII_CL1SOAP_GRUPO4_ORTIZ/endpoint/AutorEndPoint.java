@@ -5,7 +5,9 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import pe.edu.cibertec.DSWII_CL1SOAP_GRUPO4_ORTIZ.exception.NotFoundException;
 import pe.edu.cibertec.DSWII_CL1SOAP_GRUPO4_ORTIZ.service.AutorService;
+import pe.edu.cibertec.ws.objects.*;
 
 @AllArgsConstructor
 @Endpoint
@@ -16,9 +18,9 @@ public class AutorEndPoint {
 
     @PayloadRoot(namespace = NAMESPACE_URL, localPart = "getAutoresRequest")
     @ResponsePayload
-    public GetAutorResponse getAutores(@RequestPayload
-                                       GetAutorRequest request) {
-        GetAutorResponse response = new GetAutorResponse();
+    public GetAutoresResponse getAutores(@RequestPayload
+                                       GetAutoresRequest request) {
+        GetAutoresResponse response = new GetAutoresResponse();
         response.getAutores().addAll(autorService.listarAutores());
         return response;
     }
@@ -28,17 +30,17 @@ public class AutorEndPoint {
     public GetAutorResponse getAutor(@RequestPayload
                                              GetAutorRequest request){
         GetAutorResponse response = new GetAutorResponse();
-        Autorws domiciliows = autorService.obtenerAutorxId(request.getId());
-        if(domiciliows == null)
+        Autorws autorws = autorService.obtenerAutorxId(request.getId());
+        if(autorws == null)
             throw new NotFoundException("El autor con el ID " + request.getId()+" no existe!");
-        response.setAutor(domiciliows);
+        response.setAutor(autorws);
         return response;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URL, localPart = "postAutorRequest")
     @ResponsePayload
     public PostAutorResponse saveAutor(@RequestPayload
-                                               PostAutorRequest request){
+                                       PostAutorRequest request){
         PostAutorResponse response = new PostAutorResponse();
         response.setAutor(autorService.registrarActualizarAutor(
                 request.getAutor()));

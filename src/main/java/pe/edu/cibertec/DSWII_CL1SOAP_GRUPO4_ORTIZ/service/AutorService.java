@@ -3,7 +3,9 @@ package pe.edu.cibertec.DSWII_CL1SOAP_GRUPO4_ORTIZ.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pe.edu.cibertec.DSWII_CL1SOAP_GRUPO4_ORTIZ.convert.AutorConvert;
+import pe.edu.cibertec.DSWII_CL1SOAP_GRUPO4_ORTIZ.model.Autor;
 import pe.edu.cibertec.DSWII_CL1SOAP_GRUPO4_ORTIZ.repository.AutorRepository;
+import pe.edu.cibertec.ws.objects.Autorws;
 
 import java.util.List;
 import java.util.Optional;
